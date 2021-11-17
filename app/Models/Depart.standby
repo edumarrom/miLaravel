@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Depart extends Model
+{
+    use HasFactory;
+    protected $depart = 'depart';
+
+    // protected $primaryKey = 'id';  // Esto no es necesario, se da por hecho.
+
+    protected $fillable = [
+        'title',
+        'body',
+    ];
+
+    protected $guarded = [
+        'deleted', // Es redundante, ya que tenemos aplicada la whitelist ($fillable)php artisan
+    ];
+}
