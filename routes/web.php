@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,4 @@ Route::get('/', function() {
     return view('home');
 });
 
-Route::get('/depart', function() {
-    return view('depart.index');
-});
+Route::get('/depart', [DepartController::class, 'index']);
