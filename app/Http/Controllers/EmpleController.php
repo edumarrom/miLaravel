@@ -22,9 +22,19 @@ class EmpleController extends Controller
     {
         $empleado = $this->findEmpleado($id);
 
-        return view('emple.show', [
+        return view('emple.show', [     // TODO: Crear vista show, con cada campo como una fila
             'empleado' => $empleado,
         ]);
+    }
+
+    public function destroy($id)
+    {
+        $empleado = $this->findEmpleado($id);
+
+        DB::delete('DELETE FROM emple WHERE id = ?', [$id]);
+
+        return redirect()->back()
+            ->with('success', 'Empleado borrado correctamente');
     }
 
     private function findEmpleado($id)

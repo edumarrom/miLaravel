@@ -28,12 +28,16 @@ Route::get('/', function() {
 | Departamentos
 |--------------------------------------------------------------------------
 */
+
 Route::get('/depart', [DepartController::class, 'index']);
+Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 
 /*
 |--------------------------------------------------------------------------
 | Empleados
 |--------------------------------------------------------------------------
 */
+
 Route::get('/emple', [EmpleController::class, 'index']);
 Route::get('/emple/{id}', [EmpleController::class, 'show'])->where('id', '[0-9]+');
+Route::delete('/emple/{id}', [EmpleController::class, 'destroy']);
