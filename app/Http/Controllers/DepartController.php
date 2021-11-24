@@ -16,6 +16,26 @@ class DepartController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('depart.create');
+    }
+
+    public function store()
+    {
+        $validados = $this->validar();
+
+        DB::insert('INSERT
+                      INTO depart (denominacion, localidad)
+                    values (?, ?)', [
+            $validados['denominacion'],
+            $validados['localidad'],
+        ]);
+
+        return redirect('/depart')
+            ->with('success', 'Departamento insertado con éxito.');
+    }
+
     public function destroy($id)
     {
         $departamento = $this->findDepartamento($id);
@@ -36,5 +56,15 @@ class DepartController extends Controller
         abort_unless($departamento, 404);
 
         return $departamento[0];
+    }
+
+    private function validar()
+    {
+        $validados = request()->validate([
+            'denominacion' => 'required|max:255',
+            'localidad' => 'required|max:255',
+        ]);
+
+        return $validados;
     }
 }

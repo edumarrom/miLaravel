@@ -27,8 +27,15 @@ Route::get('/', function() {
 |--------------------------------------------------------------------------
 | Departamentos
 |--------------------------------------------------------------------------
+| Aquí están todas las rutas necesarias para controlar la tabla "depart".
+| El orden de las rutas es importante (Programaciñon defensiva). Por el
+| momento ordenaré las rutas por aparición en su acrónimo CRUD:
+| (CREATE, READ, UPDATE, DELETE)
+|
 */
 
+Route::get('/depart/create', [DepartController::class, 'create']);
+Route::post('/depart/', [DepartController::class, 'store']);
 Route::get('/depart', [DepartController::class, 'index']);
 Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 
@@ -36,8 +43,26 @@ Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 |--------------------------------------------------------------------------
 | Empleados
 |--------------------------------------------------------------------------
+|
+| Aquí están todas las rutas necesarias para controlar la tabla "emple". El
+| orden de las rutas es importante (Programaciñon defensiva). Por el
+| momento ordenaré las rutas por aparición en su acrónimo CRUD:
+| (CREATE, READ, UPDATE, DELETE)
+|
 */
 
+Route::get('/emple/create', [EmpleController::class, 'create']);
 Route::get('/emple', [EmpleController::class, 'index']);
 Route::get('/emple/{id}', [EmpleController::class, 'show'])->where('id', '[0-9]+');
 Route::delete('/emple/{id}', [EmpleController::class, 'destroy']);
+
+
+/*
+- DONE! - GET /depart   => index (select global)
+GET /depart/create => create (formulario en blanco para INSERT)
+POST /depart  => store (graba la información)
+ - EN PROCESO - GET /depart/{id} => show (select de una fila)
+GET /depart/{id}/edit => edit (formalario para modificar una fila)
+PUT/PATCH /depart/{id} => update (update de una fila)
+- DONE! - DELETE /depart/{id} => destroy (delete de la fila)
+*/

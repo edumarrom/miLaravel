@@ -11,7 +11,7 @@ class EmpleController extends Controller
     {
         $empleados = DB::select('SELECT e.*, d.denominacion
                                 FROM emple e
-                                JOIN depart d
+                           LEFT JOIN depart d
                                   ON depart_id = d.id');
         return view('emple.index', [
             'empleados' => $empleados,
@@ -27,9 +27,14 @@ class EmpleController extends Controller
         ]);
     }
 
+    public function create()
+    {
+        return view('emple.create');
+    }
+
     public function destroy($id)
     {
-        $empleado = $this->findEmpleado($id);
+        $this->findEmpleado($id);   // No es necesario guardar el valor de retorno de esta función.
 
         DB::delete('DELETE FROM emple WHERE id = ?', [$id]);
 
@@ -41,7 +46,7 @@ class EmpleController extends Controller
     {
         $empleado = DB::select('SELECT e.*, d.denominacion
                                   FROM emple e
-                                  JOIN depart d
+                             LEFT JOIN depart d
                                     ON depart_id = d.id
                                  WHERE e.id = ?', [$id]);
 

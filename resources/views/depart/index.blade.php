@@ -50,5 +50,10 @@
                 @endforeach
             </table>
         </div>
+
+        <button class=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <a href="/depart/create">Insertar nuevo departamento</a>
+        </button>
     </div>
 </x-layout>
