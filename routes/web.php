@@ -34,9 +34,20 @@ Route::get('/', function() {
 |
 */
 
+/* Create */
 Route::get('/depart/create', [DepartController::class, 'create']);
-Route::post('/depart/', [DepartController::class, 'store']);
+Route::post('/depart', [DepartController::class, 'store'])
+    ->name('depart.store');
+
+/* Read */
 Route::get('/depart', [DepartController::class, 'index']);
+
+/* Update */
+Route::get('/depart/{id}/edit', [DepartController::class, 'edit']);
+Route::put('/depart/{id}', [DepartController::class, 'update'])
+    ->name('depart.update');
+
+/* Delete */
 Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 
 /*

@@ -33,7 +33,7 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <a href="#"
+                                <a href="/depart/{{ $departs->id }}/edit"
                                     class="px-4 py-1 text-sm text-white bg-blue-400 rounded">Editar</a>
                             </td>
                             <td class="px-6 py-4">
@@ -51,9 +51,9 @@
             </table>
         </div>
 
-        <button class=" mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
-            focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-            <a href="/depart/create">Insertar nuevo departamento</a>
-        </button>
+        <a href="/depart/create" class=" mt-4 text-white bg-green-400 hover:bg-green-500 focus:ring-4
+            focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Insertar nuevo departamento
+        </a>
     </div>
 </x-layout>
