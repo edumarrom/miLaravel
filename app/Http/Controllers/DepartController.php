@@ -21,6 +21,33 @@ class DepartController extends Controller
         return view('depart.create');
     }
 
+    public function edit($id)
+    {
+        $departamento = $this->findDepartamento($id);
+
+        return view('depart.edit', [
+            'departamento' => $departamento,
+        ]);
+    }
+
+    public function update($id)
+    {
+        $validados = $this->validar();
+
+        DB::update('UPDATE depart
+                       SET denominacion = ?
+                         , localidad = ?
+                     WHERE id = ?', [
+            $validados['denominacion'],
+            $validados['localidad'],
+            $id,
+        ]);
+
+        return redirect('/depart')
+            ->with('success', 'El departamento modificado con éxito.');
+
+    }
+
     public function store()
     {
         $validados = $this->validar();
@@ -38,7 +65,7 @@ class DepartController extends Controller
 
     public function destroy($id)
     {
-        $departamento = $this->findDepartamento($id);
+        $this->findDepartamento($id);  // No es necesario que vuelque en una variable
 
         DB::delete('DELETE FROM depart
                           WHERE id = ?', [$id]);
