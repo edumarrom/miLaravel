@@ -28,7 +28,7 @@ Route::get('/', function() {
 | Departamentos
 |--------------------------------------------------------------------------
 | Aquí están todas las rutas necesarias para controlar la tabla "depart".
-| El orden de las rutas es importante (Programaciñon defensiva). Por el
+| El orden de las rutas es importante (Programación defensiva). Por el
 | momento ordenaré las rutas por aparición en su acrónimo CRUD:
 | (CREATE, READ, UPDATE, DELETE)
 |
@@ -56,7 +56,7 @@ Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 |--------------------------------------------------------------------------
 |
 | Aquí están todas las rutas necesarias para controlar la tabla "emple". El
-| orden de las rutas es importante (Programaciñon defensiva). Por el
+| orden de las rutas es importante (Programación defensiva). Por el
 | momento ordenaré las rutas por aparición en su acrónimo CRUD:
 | (CREATE, READ, UPDATE, DELETE)
 |

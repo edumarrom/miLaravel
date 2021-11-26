@@ -1,5 +1,7 @@
 <x-layout>
-    <x-depart.form
-        :denominacion="''"
-        :localidad="''" />
+    <form action="{{ route('depart.store', [], false) }}" method="POST">
+        <x-depart.form
+            :denominacion="''"
+            :localidad="''" />
+    </form>
 </x-layout>
