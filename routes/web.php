@@ -62,9 +62,22 @@ Route::delete('/depart/{id}', [DepartController::class, 'destroy']);
 |
 */
 
+/* Create */
 Route::get('/emple/create', [EmpleController::class, 'create']);
+Route::post('/emple', [EmpleController::class, 'store'])
+    ->name('emple.store');
+
+/* Read */
 Route::get('/emple', [EmpleController::class, 'index']);
+
 Route::get('/emple/{id}', [EmpleController::class, 'show'])->where('id', '[0-9]+');
+
+/* Update */
+Route::get('/emple/{id}/edit', [EmpleController::class, 'edit']);
+Route::put('/emple/{id}', [EmpleController::class, 'update'])
+    ->name('emple.update');
+
+/* Delete */
 Route::delete('/emple/{id}', [EmpleController::class, 'destroy']);
 
 

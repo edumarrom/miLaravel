@@ -9,8 +9,8 @@ class DepartController extends Controller
 {
     public function index()
     {
-        $departs = DB::select('SELECT *
-                                 FROM depart');
+        $departs = DB::table('depart')->get();
+
         return view('depart.index', [
             'departamentos' => $departs,
         ]);
@@ -33,14 +33,13 @@ class DepartController extends Controller
     public function update($id)
     {
         $validados = $this->validar();
+        $this->findDepartamento($id);
 
-        DB::update('UPDATE depart
-                       SET denominacion = ?
-                         , localidad = ?
-                     WHERE id = ?', [
-            $validados['denominacion'],
-            $validados['localidad'],
-            $id,
+        DB::table('depart')
+            ->where('id', $id)
+            ->update([
+                'denominacion' => $validados['denominacion'],
+                'localidad' => $validados['localidad'],
         ]);
 
         return redirect('/depart')
@@ -52,11 +51,10 @@ class DepartController extends Controller
     {
         $validados = $this->validar();
 
-        DB::insert('INSERT
-                      INTO depart (denominacion, localidad)
-                    values (?, ?)', [
-            $validados['denominacion'],
-            $validados['localidad'],
+        DB::table('depart')
+            ->insert([
+                'denominacion' => $validados['denominacion'],
+                'localidad' => $validados['localidad'],
         ]);
 
         return redirect('/depart')
@@ -67,8 +65,7 @@ class DepartController extends Controller
     {
         $this->findDepartamento($id);  // No es necesario que vuelque en una variable
 
-        DB::delete('DELETE FROM depart
-                          WHERE id = ?', [$id]);
+        DB::table('depart')->where('id', $id)->delete();
 
         return redirect()->back()
             ->with('success', 'Departamento borrado correctamente');
@@ -76,13 +73,15 @@ class DepartController extends Controller
 
     private function findDepartamento($id)
     {
-        $departamento = DB::select('SELECT *
+        $departamentos = DB::table('depart')
+            ->where('id', $id)->get();
+/*         $departamento = DB::select('SELECT *
                                       FROM depart
-                                     WHERE id = ?', [$id]);
+                                     WHERE id = ?', [$id]); */
 
-        abort_unless($departamento, 404);
+        abort_if($departamentos->isEmpty(), 404);
 
-        return $departamento[0];
+        return $departamentos->first();
     }
 
     private function validar()
