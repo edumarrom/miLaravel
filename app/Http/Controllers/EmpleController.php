@@ -34,14 +34,22 @@ class EmpleController extends Controller
 
     public function create()
     {
-        return view('emple.create');
+        $empleado = (object) [
+            'nombre' => null,
+            'fecha_alt' => null,
+            'salario' => null,
+            'depart_id' => null
+        ];
+        return view('emple.create', [
+            'empleado' => $empleado,
+        ]);
     }
 
     public function store()
     {
         $validados = $this->validar();
 
-        DB::table('Emple')
+        DB::table('emple')
             ->insert([
                 'nombre' => $validados['nombre'],
                 'fecha_alt' => $validados['fecha_alt'],
@@ -49,17 +57,36 @@ class EmpleController extends Controller
                 'depart_id' => $validados['depart_id'],
         ]);
 
-        return redirect('/Emple')
+        return redirect('/emple')
             ->with('success', 'Empleado insertado con éxito.');
     }
 
     public function edit($id)
     {
-        $departamento = $this->findDepartamento($id);
+        $empleado = $this->findEmpleado($id);
 
-        return view('depart.edit', [
-            'departamento' => $departamento,
+        return view('emple.edit', [
+            'empleado' => $empleado,
         ]);
+    }
+
+    public function update($id)
+    {
+        $validados = $this->validar();
+        $this->findEmpleado($id);
+
+        DB::table('emple')
+            ->where('id', $id)
+            ->update([
+                'nombre' => $validados['nombre'],
+                'fecha_alt' => $validados['fecha_alt'],
+                'salario' => $validados['salario'],
+                'depart_id' => $validados['depart_id'],
+        ]);
+
+        return redirect('/emple')
+            ->with('success', 'Empleado modificado con éxito.');
+
     }
 
     public function destroy($id)
@@ -91,5 +118,19 @@ class EmpleController extends Controller
         abort_if($empleados->isEmpty(), 404);
 
         return $empleados->first();
+    }
+
+    private function validar()
+    {
+        $validados = request()->validate([
+            'nombre' => 'required|max:255',
+            'fecha_alt' => 'required|date',
+        //  'salario' => 'required|min:0|max:9999.99',
+            'salario' => 'required|numeric|between:0,9999.99',
+        //  'salario' => 'required|regex:/^\d{0,4}(\.\d{1,2})?$/',
+            'depart_id' => 'required|exists:depart,id',
+        ]);
+
+        return $validados;
     }
 }

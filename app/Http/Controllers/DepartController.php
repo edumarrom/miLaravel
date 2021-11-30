@@ -18,7 +18,13 @@ class DepartController extends Controller
 
     public function create()
     {
-        return view('depart.create');
+        $departamento = (object) [
+            'denominacion' => null,
+            'localidad' => null,
+        ];
+        return view('depart.create', [
+            'departamento' => $departamento,
+        ]);
     }
 
     public function edit($id)
@@ -43,7 +49,7 @@ class DepartController extends Controller
         ]);
 
         return redirect('/depart')
-            ->with('success', 'El departamento modificado con éxito.');
+            ->with('success', 'Departamento modificado con éxito.');
 
     }
 
