@@ -1,15 +1,24 @@
 <x-layout>
+    <x-depart.search/>
     <div class="flex flex-col items-center mt-4">
         <h1 class="mb-4 text-2xl font-semibold">Departamentos</h1>
         <div class="border border-gray-200 shadow">
             <table>
                 <thead class="bg-gray-50">
                     <tr>
+                        @php
+                            $link = e("denominacion=" . old('denominacion') . "&localidad=" . old('localidad'));
+                        @endphp
+
                         <th class="px-6 py-2 text-xs text-gray-500">
-                            Denominación
+                            <a href="/depart?orden=denominacion&{!! $link !!}">
+                                Denominación
+                            </a>
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
-                            Localidad
+                            <a href="/depart?orden=localidad&{!! $link !!}">
+                                Localidad
+                            </a>
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
                             Editar
@@ -56,4 +65,5 @@
             Insertar nuevo departamento
         </a>
     </div>
+    {{ $departamentos->links() }}
 </x-layout>

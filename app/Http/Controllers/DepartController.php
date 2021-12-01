@@ -9,10 +9,30 @@ class DepartController extends Controller
 {
     public function index()
     {
-        $departs = DB::table('depart')->get();
+        $ordenes = ['denominacion', 'localidad'];
+        $orden = request()->query('orden') ?: 'denominacion';
+        abort_unless(in_array($orden, $ordenes), 404);
+
+        $departs = DB::table('depart')
+            ->orderBy($orden);
+
+        if (($denominacion = request()->query('denominacion')) !== null) {
+            $departs->where('denominacion', 'ilike', "%$denominacion%");
+        }
+
+        if (($localidad = request()->query('localidad')) !== null) {
+            $departs->where('localidad', 'ilike', "%$localidad%");
+        }
+
+        $paginador = $departs->paginate(4);
+        $paginador->appends(compact(
+            'orden',
+            'denominacion',
+            'localidad'
+        ));
 
         return view('depart.index', [
-            'departamentos' => $departs,
+            'departamentos' => $paginador,
         ]);
     }
 
