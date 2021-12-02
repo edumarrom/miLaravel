@@ -7,7 +7,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         @php
-                            $link = e("denominacion=" . old('denominacion') . "&localidad=" . old('localidad'));
+                            $link = e("denominacion=" . request()->query('denominacion') . "&localidad=" . request()->query('localidad'));
                         @endphp
 
                         <th class="px-6 py-2 text-xs text-gray-500">

@@ -1,7 +1,6 @@
 <div class="w-80">
     <form action="/depart" method="get">
         <input type="hidden" name="orden" value="{{ request()->query('orden') }}">
-        {{-- TODO: Tiene que venir algo más que el orden --}}
         <div class="mb-3">
             <label for="denominacion"
                 class="text-sm font-medium text-gray-900 block mb-2">
