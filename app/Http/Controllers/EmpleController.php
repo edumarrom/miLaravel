@@ -34,7 +34,7 @@ class EmpleController extends Controller
         }
 
         if (($salario = request()->query('salario')) !== null) {
-            $empleados->where('salario', 'ilike', "%$salario%");
+            $empleados->where('salario', '>=', "$salario");
         }
 
         if (($departamento = request()->query('departamento')) !== null) {
