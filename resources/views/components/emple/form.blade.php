@@ -1,7 +1,9 @@
 @csrf
 <div class="mb-6">
     <label for="nombre"
-    class="text-sm font-medium text-gray-900 block mb-2 @error('nombre') text-red-500 @enderror">Nombre</label>
+    class="text-sm font-medium text-gray-900 block mb-2 @error('nombre') text-red-500 @enderror">
+        Nombre
+    </label>
     <input type="text" id="nombre" name="nombre"
         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('nombre') border-red-500 @enderror"
@@ -14,7 +16,9 @@
 </div>
 <div class="mb-6">
     <label for="fecha_alt"
-    class="text-sm font-medium text-gray-900 block mb-2 @error('fecha_alt') text-red-500 @enderror">Fecha de alta</label>
+    class="text-sm font-medium text-gray-900 block mb-2 @error('fecha_alt') text-red-500 @enderror">
+        Fecha de alta
+    </label>
     <input type="text" id="fecha_alt" name="fecha_alt"
         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('fecha_alt') border-red-500 @enderror"
@@ -27,7 +31,9 @@
 </div>
 <div class="mb-6">
     <label for="salario"
-    class="text-sm font-medium text-gray-900 block mb-2 @error('salario') text-red-500 @enderror">Salario</label>
+        class="text-sm font-medium text-gray-900 block mb-2 @error('salario') text-red-500 @enderror">
+        Salario
+    </label>
     <input type="text" id="salario" name="salario"
         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('salario') border-red-500 @enderror"
@@ -40,7 +46,9 @@
 </div>
 <div class="mb-6">
     <label for="depart_id"
-    class="text-sm font-medium text-gray-900 block mb-2 @error('depart_id') text-red-500 @enderror">ID Departamento</label>
+        class="text-sm font-medium text-gray-900 block mb-2 @error('depart_id') text-red-500 @enderror">
+        ID Departamento
+    </label>
     <input type="text" id="depart_id" name="depart_id"
         class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 @error('depart_id') border-red-500 @enderror"

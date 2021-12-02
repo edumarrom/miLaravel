@@ -10,16 +10,48 @@ class EmpleController extends Controller
     public function index()
     {
 
+        $ordenes = ['nombre', 'fecha_alt',
+                    'salario', 'denominacion'];
+        $orden = request()->query('orden') ?: 'nombre';
+        abort_unless(in_array($orden, $ordenes), 404);
+
         $empleados = DB::table('emple', 'e')
             ->leftJoin('depart AS d', 'depart_id', '=', 'd.id')
             ->select('e.*', 'denominacion')
-            ->get();
-       /*  $empleados = DB::select('SELECT e.*, d.denominacion
+            ->orderBy($orden);
+
+            /*  $empleados = DB::select('SELECT e.*, d.denominacion
                                 FROM emple e
                            LEFT JOIN depart d
                                   ON depart_id = d.id'); */
+
+        if (($nombre = request()->query('nombre')) !== null) {
+            $empleados->where('nombre', 'ilike', "%$nombre%");
+        }
+
+        if (($fecha_alt = request()->query('fecha_alt')) !== null) {
+            $empleados->where('fecha_alt', 'ilike', "%$fecha_alt%");
+        }
+
+        if (($salario = request()->query('salario')) !== null) {
+            $empleados->where('salario', 'ilike', "%$salario%");
+        }
+
+        if (($departamento = request()->query('departamento')) !== null) {
+            $empleados->where('denominacion', 'ilike', "%$departamento%");
+        }
+
+        $paginador = $empleados->paginate(4);
+        $paginador->appends(compact(
+            'orden',
+            'nombre',
+            'fecha_alt',
+            'salario',
+            'departamento'
+        ));
+
         return view('emple.index', [
-            'empleados' => $empleados,
+            'empleados' => $paginador,
         ]);
     }
 
