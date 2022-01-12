@@ -62,7 +62,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="text-sm text-gray-900">
-                                    {{$emples->denominacion}}
+                                    {{$emples->departamento->denominacion}}
                                 </div>
                             </td>
                             <td class="px-6 py-4">

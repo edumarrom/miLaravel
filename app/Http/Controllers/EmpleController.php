@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Emple;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,15 +16,12 @@ class EmpleController extends Controller
         $orden = request()->query('orden') ?: 'nombre';
         abort_unless(in_array($orden, $ordenes), 404);
 
-        $empleados = DB::table('emple', 'e')
+        $empleados = Emple::orderBy($orden);
+
+        /* $empleados = DB::table('emple', 'e')
             ->leftJoin('depart AS d', 'depart_id', '=', 'd.id')
             ->select('e.*', 'denominacion')
-            ->orderBy($orden);
-
-            /*  $empleados = DB::select('SELECT e.*, d.denominacion
-                                FROM emple e
-                           LEFT JOIN depart d
-                                  ON depart_id = d.id'); */
+            ->orderBy($orden); */
 
         if (($nombre = request()->query('nombre')) !== null) {
             $empleados->where('nombre', 'ilike', "%$nombre%");

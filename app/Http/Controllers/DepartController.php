@@ -120,12 +120,16 @@ class DepartController extends Controller
 
         /* $this->findDepartamento($id);  // No es necesario que vuelque en una variable */
 
-        if(Emple::where('depart_id', $departamento->id)->doesntExist()) {
-            Depart::where('id', $id)->delete();
-        } else {
+
+
+        if ($departamento->empleados->isNotEmpty()) {
             return redirect()->back()
             ->with('error', 'El departamento no está vacío.');
         }
+
+        $departamento->delete();
+
+        /* if(Emple::where('depart_id', $departamento->id)->doesntExist()) { */
 
         /* DB::table('depart')->where('id', $id)->delete(); */
 

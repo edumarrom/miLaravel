@@ -14,4 +14,15 @@ class Emple extends Model
      * @var string
      */
     protected $table = 'emple';
+
+    protected $fillable = ['nombre', 'fecha_alt', 'salario', 'depart_id'];
+
+    /**
+     * El belongsTo va donde se ubica la foreign_key
+     *
+     */
+    public function departamento()
+    {
+        return $this->belongsTo(Depart::class, 'depart_id');
+    }
 }
