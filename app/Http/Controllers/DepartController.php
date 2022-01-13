@@ -11,7 +11,8 @@ class DepartController extends Controller
 {
     public function index()
     {
-        $ordenes = ['denominacion', 'localidad'];
+        $ordenes = ['denominacion','localidad'];
+
         $orden = request()->query('orden') ?: 'denominacion';
         abort_unless(in_array($orden, $ordenes), 404);
 
@@ -21,6 +22,10 @@ class DepartController extends Controller
             ->orderBy($orden); */
 
         if (($denominacion = request()->query('denominacion')) !== null) {
+            $departs->where('denominacion', 'ilike', "%$denominacion%");
+        }
+
+        if (($denominacion_desc = request()->query('denominacion')) !== null) {
             $departs->where('denominacion', 'ilike', "%$denominacion%");
         }
 

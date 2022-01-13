@@ -54,7 +54,7 @@ class EmpleController extends Controller
 
     public function show($id)
     {
-        $empleado = $this->findEmpleado($id);
+        $empleado = Emple::findOrFail($id);
 
         return view('emple.show', [     // TODO: Crear vista show, con cada campo como una fila
             'empleado' => $empleado,
@@ -118,33 +118,12 @@ class EmpleController extends Controller
 
     public function destroy($id)
     {
-        $this->findEmpleado($id);   // No es necesario guardar el valor de retorno de esta función.
+        $empleado = Emple::findOrFail($id);
 
-        DB::table('emple')
-            ->where('id', $id)
-            ->delete();
-        /* DB::delete('DELETE FROM emple WHERE id = ?', [$id]); */
+        $empleado->delete();
 
-        return redirect()->back()
-            ->with('success', 'Empleado borrado correctamente');
-    }
-
-    private function findEmpleado($id)
-    {
-        $empleados = DB::table('emple', 'e')
-            ->leftJoin('depart AS d', 'depart_id', '=', 'd.id')
-            ->where('e.id', $id)
-            ->select('e.*', 'denominacion')
-            ->get();
-/*         $empleado = DB::select('SELECT e.*, d.denominacion
-                                  FROM emple e
-                             LEFT JOIN depart d
-                                    ON depart_id = d.id
-                                 WHERE e.id = ?', [$id]); */
-
-        abort_if($empleados->isEmpty(), 404);
-
-        return $empleados->first();
+        return redirect('/depart')
+            ->with('success', 'Empleado borrado con éxito.');
     }
 
     private function validar()

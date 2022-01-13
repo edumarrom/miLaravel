@@ -8,11 +8,17 @@
                     <tr>
                         @php
                             $link = e("denominacion=" . request()->query('denominacion') . "&localidad=" . request()->query('localidad'));
+
+                            $asc = true;
+                            $titulo = e("Denominación ⏷");
+                            $orden = e("denominacion");
                         @endphp
 
+                        {{-- ⏶ ⏷ --}}
                         <th class="px-6 py-2 text-xs text-gray-500">
+
                             <a href="/depart?orden=denominacion&{!! $link !!}">
-                                Denominación
+                                {!! $titulo !!}
                             </a>
                         </th>
                         <th class="px-6 py-2 text-xs text-gray-500">
