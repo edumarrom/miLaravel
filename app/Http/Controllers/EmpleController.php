@@ -10,7 +10,6 @@ class EmpleController extends Controller
 {
     public function index()
     {
-
         $ordenes = ['nombre', 'fecha_alt',
                     'salario', 'denominacion'];
         $orden = request()->query('orden') ?: 'nombre';
@@ -64,12 +63,8 @@ class EmpleController extends Controller
 
     public function create()
     {
-        $empleado = (object) [
-            'nombre' => null,
-            'fecha_alt' => null,
-            'salario' => null,
-            'depart_id' => null
-        ];
+        $empleado = new Emple();
+
         return view('emple.create', [
             'empleado' => $empleado,
         ]);
@@ -79,13 +74,17 @@ class EmpleController extends Controller
     {
         $validados = $this->validar();
 
-        DB::table('emple')
+        $empleado = new Emple($validados);
+
+        /* DB::table('emple')
             ->insert([
                 'nombre' => $validados['nombre'],
                 'fecha_alt' => $validados['fecha_alt'],
                 'salario' => $validados['salario'],
                 'depart_id' => $validados['depart_id'],
-        ]);
+        ]); */
+
+        $empleado->save();
 
         return redirect('/emple')
             ->with('success', 'Empleado insertado con éxito.');
@@ -93,7 +92,7 @@ class EmpleController extends Controller
 
     public function edit($id)
     {
-        $empleado = $this->findEmpleado($id);
+        $empleado = Emple::findOrFail($id);
 
         return view('emple.edit', [
             'empleado' => $empleado,
@@ -103,15 +102,13 @@ class EmpleController extends Controller
     public function update($id)
     {
         $validados = $this->validar();
-        $this->findEmpleado($id);
+        $empleado = Emple::findOrFail($id);
 
-        DB::table('emple')
-            ->where('id', $id)
-            ->update([
-                'nombre' => $validados['nombre'],
-                'fecha_alt' => $validados['fecha_alt'],
-                'salario' => $validados['salario'],
-                'depart_id' => $validados['depart_id'],
+        $empleado->fill([
+            'nombre' => $validados['nombre'],
+            'fecha_alt' => $validados['fecha_alt'],
+            'salario' => $validados['salario'],
+            'depart_id' => $validados['depart_id'],
         ]);
 
         return redirect('/emple')
