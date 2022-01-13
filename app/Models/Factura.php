@@ -20,9 +20,4 @@ class Factura extends Model
     {
         return $this->hasMany(Linea::class);
     }
-
-    public function articulos()
-    {
-        return $this->hasManyThrough(Articulo::class, Linea::class);
-    }
 }
