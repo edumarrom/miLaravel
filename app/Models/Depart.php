@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Depart extends Model
 {
     use HasFactory;
-
-    use HasFactory;
     /**
      * The table associated with the model.
      *
