@@ -20,4 +20,11 @@ class Factura extends Model
     {
         return $this->hasMany(Linea::class);
     }
+
+    public function articulos()
+    {
+        return $this->belongsToMany(Articulo::class, 'lineas')
+            ->as('linea')
+            ->withPivot(['id', 'cantidad', 'created_at', 'updated_at']);
+    }
 }

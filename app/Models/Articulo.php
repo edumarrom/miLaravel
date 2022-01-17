@@ -15,4 +15,11 @@ class Articulo extends Model
     {
         return $this->hasMany(Linea::class);
     }
+
+    public function facturas()
+    {
+        return $this->belongsToMany(Factura::class, 'lineas')
+            ->as('linea')
+            ->withPivot(['id', 'cantidad', 'created_at', 'updated_at']);
+    }
 }
