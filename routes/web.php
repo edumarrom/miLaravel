@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepartController;
 use App\Http\Controllers\EmpleController;
 use Illuminate\Support\Facades\Route;
@@ -80,6 +81,9 @@ Route::put('/emple/{id}', [EmpleController::class, 'update'])
 /* Delete */
 Route::delete('/emple/{id}', [EmpleController::class, 'destroy']);
 
+
+/* Asignacion de rutas por medio de recursos */
+Route::resource('cliente', ClienteController::class);
 
 /*
 - DONE! - GET /depart   => index (select global)

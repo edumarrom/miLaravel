@@ -11,9 +11,11 @@ class Linea extends Model
 
     protected $fillable = ['factura_id', 'articulo_id', 'cantidad'];
 
+    public $incrementing = true;
+
     public function factura()
     {
-        return $this->belongsTo(Factura::class, 'factura_id');
+        return $this->belongsTo(Factura::class, 'factura_id'); // SObraría el 2do argumento
     }
 
     public function articulo()

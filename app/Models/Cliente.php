@@ -15,4 +15,14 @@ class Cliente extends Model
     {
         return $this->hasMany(Factura::class);
     }
+
+    /**
+     * Si la relación cliente_factura es 1:n y factura_linea es 1:n
+     */
+    public function lineas()
+    {
+        return $this->hasManyThrough(Linea::class, Factura::class);
+    }
+
+
 }
